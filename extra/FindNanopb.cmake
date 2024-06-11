@@ -292,6 +292,9 @@ function(NANOPB_GENERATE_CPP)
         set(NANOPB_PLUGIN_OPTIONS "${NANOPB_PLUGIN_OPTIONS} -I${options_path}")
     endforeach()
 
+    # Remove leading space before the first -I directive
+    string(STRIP "${NANOPB_PLUGIN_OPTIONS}" NANOPB_PLUGIN_OPTIONS)
+
     if(NANOPB_OPTIONS)
         set(NANOPB_PLUGIN_OPTIONS "${NANOPB_PLUGIN_OPTIONS} ${NANOPB_OPTIONS}")
     endif()
@@ -443,6 +446,7 @@ find_path(NANOPB_GENERATOR_SOURCE_DIR
     DOC "nanopb generator source"
     PATHS
     ${NANOPB_SRC_ROOT_FOLDER}/generator
+    NO_DEFAULT_PATH
     NO_CMAKE_FIND_ROOT_PATH
 )
 mark_as_advanced(NANOPB_GENERATOR_SOURCE_DIR)
